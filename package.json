@@ -1,0 +1,26 @@
+{
+  "name": "react-native-get-sms-android-custom",
+  "version": "2.1.1",
+  "description": "React-native module that gets sms from android device",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Noctis2111/react-native-get-sms-android-custom.git"
+  },
+  "keywords": [
+    "react-native",
+    "android"
+  ],
+  "author": "Brian Kabiro",
+  "license": "MIT",
+  "peerDependencies": {
+    "react-native": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/Noctis2111/react-native-get-sms-android-custom/issues"
+  },
+  "homepage": "https://github.com/Noctis2111/react-native-get-sms-android-custom#readme"
+}
