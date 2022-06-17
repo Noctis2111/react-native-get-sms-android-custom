@@ -1,4 +1,4 @@
-# react-native-get-sms-android
+# react-native-get-sms-android-custom
 
 Module that supports interaction with the Messaging API on Android
 
@@ -9,6 +9,7 @@ The package allows you to:
 - delete messages
 
 > Decided to start this package because [_react-native-android-sms_](https://github.com/msmakhlouf/react-native-android-sms) wasn't maintained at the time.
+> Add function autoSendMultiSim and add a default error
 
 ---
 
@@ -16,27 +17,27 @@ The package allows you to:
 
 #### Yarn
 
-`$ yarn add react-native-get-sms-android`
+`$ yarn add react-native-get-sms-android-custom`
 
 #### Npm
 
-`$ npm install react-native-get-sms-android --save`
+`$ npm install react-native-get-sms-android-custom --save`
 
 ### Mostly automatic installation
 
-`$ react-native link react-native-get-sms-android`
+`$ react-native link react-native-get-sms-android-custom`
 
 #### Manual installation
 
 _android/settings.gradle_
 
-    include ':react-native-get-sms-android'
-    project(':react-native-get-sms-android').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-get-sms-android/android')
+    include ':react-native-get-sms-android-custom'
+    project(':react-native-get-sms-android-custom').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-get-sms-android-custom/android')
 
 _android/app/build.gradle_
 
     dependencies{
-        compile project(':react-native-get-sms-android')
+        compile project(':react-native-get-sms-android-custom')
      }
 
 _MainApplication.java_
@@ -68,7 +69,7 @@ Add permissions to your `android/app/src/main/AndroidManifest.xml` file.
 
 ## Upgrading to 2.x
 
-You need to add permissions manually. `react-native-get-sms-android` does not automatically require permissions from 2.x. Refer to [this](https://github.com/briankabiro/react-native-get-sms-android/issues/34) issue.
+You need to add permissions manually. `react-native-get-sms-android-custom` does not automatically require permissions from 2.x. Refer to [this](https://github.com/briankabiro/react-native-get-sms-android/issues/34) issue.
 
 You need to require permissions in your `AndroidManifest.xml` file's `application` element based on what functions you plan to use like [the official documentation](https://developer.android.com/guide/topics/permissions/overview) describes:
 
@@ -83,7 +84,7 @@ You need to require permissions in your `AndroidManifest.xml` file's `applicatio
 ### List SMS Messages
 
 ```javascript
-import SmsAndroid from 'react-native-get-sms-android';
+import SmsAndroid from 'react-native-get-sms-android-custom';
 
 /* List SMS messages matching the filter */
 var filter = {
@@ -91,7 +92,7 @@ var filter = {
 
   /**
    *  the next 3 filters can work together, they are AND-ed
-   *  
+   *
    *  minDate, maxDate filters work like this:
    *    - If and only if you set a maxDate, it's like executing this SQL query:
    *    "SELECT * from messages WHERE (other filters) AND date <= maxDate"
@@ -174,16 +175,16 @@ Each sms will be represents by a JSON object represented below
 Delete an sms with id. If the message with the specified id does not exist it will fail with error: `SMS not found`
 
 ```javascript
-import SmsAndroid from 'react-native-get-sms-android';
+import SmsAndroid from "react-native-get-sms-android-custom";
 
 SmsAndroid.delete(
   _id,
   (fail) => {
-    console.log('Failed with this error: ' + fail);
+    console.log("Failed with this error: " + fail);
   },
   (success) => {
-    console.log('SMS deleted successfully');
-  },
+    console.log("SMS deleted successfully");
+  }
 );
 ```
 
@@ -192,17 +193,17 @@ SmsAndroid.delete(
 Send an sms directly with React without user interaction.
 
 ```javascript
-import SmsAndroid from 'react-native-get-sms-android';
+import SmsAndroid from "react-native-get-sms-android-custom";
 
 SmsAndroid.autoSend(
   phoneNumber,
   message,
   (fail) => {
-    console.log('Failed with this error: ' + fail);
+    console.log("Failed with this error: " + fail);
   },
   (success) => {
-    console.log('SMS sent successfully');
-  },
+    console.log("SMS sent successfully");
+  }
 );
 ```
 
@@ -211,9 +212,9 @@ SmsAndroid.autoSend(
 An event will be thrown when the sms has been delivered. If the sms was delivered successfully the message will be "SMS delivered" otherwise the message will be "SMS not delivered"
 
 ```js
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter } from "react-native";
 
-DeviceEventEmitter.addListener('sms_onDelivery', (msg) => {
+DeviceEventEmitter.addListener("sms_onDelivery", (msg) => {
   console.log(msg);
 });
 ```
